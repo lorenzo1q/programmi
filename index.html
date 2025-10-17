@@ -1,1 +1,33 @@
-ciao
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function stampa(){
+        var nome=document.getElementById("nome").value
+        var cognome=document.getElementById("cognome").value
+        var indirizzo=document.getElementById("indirizzo").value
+        document.getElementById("nome1")innerHTML=nome
+        document.getElementById("cognome1")innerHTML=cognome
+        document.getElementById("indirizzo1")innerHTML=indirizzo
+      }
+    </script>
+  </head>
+  <body>
+    <h1>
+      <input type="text"id="nome">
+    </h1>
+    <h2>
+      <input type="text"id="cognome">
+    </h2>
+    <h3>
+       <input type="text"id="indirizzo">
+    </h3>
+    <input type="button" value="cliccami" onclick="stampa ()">
+    <p id="nome1"></p>
+    <p id="cognome1"></p>
+    <p id="indirizzo1"></p>
+
+    
+
+  </body>
+</html>
