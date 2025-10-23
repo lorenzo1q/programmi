@@ -1,6 +1,5 @@
 <!DOCTYPE html>
 <head>
-  <meta charset="UTF-8">
   <title> Utente e Generazione</title>
     <button type="button" onclick="calcolaGenerazione()">Invia</button>
   </form>
