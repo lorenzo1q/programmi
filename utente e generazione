@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<head>
+  <meta charset="UTF-8">
+  <title> Utente e Generazione</title>
+    <button type="button" onclick="calcolaGenerazione()">Invia</button>
+  </form>
+  <div id="risultato"></div>
+  <script>
+    function calcolaGenerazione() {
+      const nome = document.getElementById("nome").value;
+      const cognome = document.getElementById("cognome").value;
+      const indirizzo = document.getElementById("indirizzo").value;
+      const citta = document.getElementById("citta").value;
+      const cap = document.getElementById("cap").value;
+      const dataNascita = document.getElementById("dataNascita").value;
+      const anno = new (dataNascita).getFullYear();
+      const eta = new ().getFullYear() - anno;
+      let generazione = "";
+      if (anno >= 2013) generazione = "Generazione Alpha";
+      else if (anno >= 1997) generazione = "Generazione Z";
+      else if (anno >= 1981) generazione = "Millennials";
+      else if (anno >= 1965) generazione = "Generazione X";
+      else if (anno >= 1946) generazione = "Baby Boomers";
+      else if (anno >= 1928) generazione = "Generazione Silenziosa";
+      else if (anno >= 1901) generazione = "Greatest Generation";
+      else generazione = "Pre-1900 (non classificata)";
+    }
+  </script>
+</body>
+</html>
