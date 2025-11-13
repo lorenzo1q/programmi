@@ -25,18 +25,18 @@
 <div id="griglia" class="griglia"></div>
 <p id="info"></p>
 <script>
-  let numeri = [];
+  let num = [];
   for (let i = 0; i < 100; i++) {
     let n = Math.floor(Math.random() * 201) - 100; 
-    numeri.push(n);
+    num.push(n);
   }
   let somma = 0;
-  for (let n of numeri) {
+  for (let n of num) {
     somma += n;
   }
-  let media = somma / numeri.length;
+  let media = somma / num.length;
   let maggiori50 = [];
-  for (let n of numeri) {
+  for (let n of num) {
     if (n > 50) {
       mag50.push(n);
     }
