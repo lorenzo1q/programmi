@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<head>
+<title>Numeri Casuali</title>
+<style>
+  body { font-family: Arial; text-align: center; background-color: #f0f0f0; }
+  .griglia {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    gap: 5px;
+    max-width: 650px;
+    margin: 2px auto;
+  }
+  .cella {
+    background: #ddd;
+    padding: 10px;
+    border-radius: 6px;
+  }
+  .grande {
+    background: #ffcc66; 
+  }
+</style>
+</head>
+<body>
+<h2>Numeri casuali tra -100 e 100</h2>
+<div id="griglia" class="griglia"></div>
+<p id="info"></p>
+<script>
+  let numeri = [];
+  for (let i = 0; i < 100; i++) {
+    let n = Math.floor(Math.random() * 201) - 100; 
+    numeri.push(n);
+  }
+  let somma = 0;
+  for (let n of numeri) {
+    somma += n;
+  }
+  let media = somma / numeri.length;
+  let maggiori50 = [];
+  for (let n of numeri) {
+    if (n > 50) {
+      mag50.push(n);
+    }
+  }
+</script>
+
+</body>
+</html
