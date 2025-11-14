@@ -4,11 +4,11 @@
 <style>
   body { font-family: Arial; text-align: center; background-color: #f0f0f0; }
   .griglia {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    gap: 5px;
-    max-width: 650px;
-    margin: 2px auto;
+   display: grid;
+   grid-template-columns: repeat(10, 1fr);
+   gap: 5px;
+   max-width: 650px;
+  margin: 2px auto;
   }
   .cella {
     background: #ddd;
@@ -42,6 +42,5 @@
     }
   }
 </script>
-
 </body>
 </html
