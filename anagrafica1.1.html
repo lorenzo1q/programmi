@@ -7,7 +7,6 @@
   <input type="date" id="indirizzo">
   <input type="date" id="citta">
 <input type="date" id="cap">
-
 <button type="button" onclick="calcolaGenerazione()">Invia</button>
 </form>
 <div id="risultato"></div>
@@ -15,14 +14,12 @@
 function calcolaGenerazione() {
 let nome = document.getElementById("nome").value;
 let cognome = document.getElementById("cognome").value;
-/* const indirizzo = document.getElementById("indirizzo").value;
-const citta = document.getElementById("citta").value;
-const cap = document.getElementById("cap").value;
-*/
+  let indirizzo = document.getElementById("indirizzo").value;
+let citta = document.getElementById("citta").value;
+let cap = document.getElementById("cap").value;
 let dataNascita = new Date(document.getElementById("dataNascita").value);
 let anno = dataNascita.getFullYear();
 let eta = new Date().getFullYear() - anno; 
-/* let generazione = "";
 if (anno >= 2013) generazione = "Generazione Alpha";
 else if (anno >= 1997) generazione = "Generazione Z";
 else if (anno >= 1981) generazione = "Millennials";
