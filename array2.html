@@ -1,46 +1,115 @@
 <!DOCTYPE html>
+
 <head>
-<title>Numeri Casuali</title>
-<style>
-  body { font-family: Arial; text-align: center; background-color: #f0f0f0; }
-  .griglia {
-   display: grid;
-   grid-template-columns: repeat(10, 1fr);
-   gap: 5px;
-   max-width: 650px;
-  margin: 2px auto;
-  }
-  .cella {
-    background: #ddd;
-    padding: 10px;
-    border-radius: 6px;
-  }
-  .grande {
-    background: #ffcc66; 
-  }
-</style>
+  <title>Numeri Casuali</title>
+  <style>
+    body {
+      font-family: Arial;
+      text-align: center;
+      background-color: #f0f0f0;
+    }
+
+    th,
+    td {
+      border: 1px solid black;
+    }
+
+    table {
+      margin-top: 30px;
+    }
+  </style>
 </head>
+
 <body>
-<h2>Numeri casuali tra -100 e 100</h2>
-<div id="griglia" class="griglia"></div>
-<p id="info"></p>
+  <h2>Numeri casuali tra -100 e 100</h2>
+
+  <table id="tabella">
+    <tr id="riga-numeri">
+      <td style="font-weight: bold;">Numeri da -100 a 100: </td>
+    </tr>
+
+    <tr id="riga-media">
+      <td style="font-weight: bold;">Media dei numeri: </td>
+    </tr>
+
+    <tr id="riga-maxmin">
+      <td style="font-weight: bold;">Massimo e minimo: </td>
+    </tr>
+
+    <tr id="riga-mag50">
+      <td style="font-weight: bold;">Numeri maggiori di 50: </td>
+    </tr>
+  </table>
+
+
+
+
+</body>
+
 <script>
+  let rigaNumeri = document.getElementById("riga-numeri");
+  let rigaMedia = document.getElementById("riga-media");
+  let rigaMaxMin = document.getElementById("riga-maxmin");
+  let rigaMag50 = document.getElementById("riga-mag50");
+
+
+  //popolo l'array di numeri compresi tra -100 e 100
   let num = [];
   for (let i = 0; i < 100; i++) {
-    let n = Math.floor(Math.random() * 201) - 100; 
+    let n = Math.floor(Math.random() * 201) - 100;
+
+    //creo l'elemento cella (th)
+    let cell = document.createElement('td');
+
+    //inserisco il numero casuale nella cella 
+    cell.innerHTML = n;
+
+    //inserisco la cella contenente il numero casuale nella riga della tabella
+    rigaNumeri.appendChild(cell);
+
     num.push(n);
   }
+
+  //calcolo somma x media
   let somma = 0;
   for (let n of num) {
     somma += n;
   }
-  let media = somma / num.length;
-  let maggiori50 = [];
+
+  //calcolo media
+  let media = somma / num.length //ho scritto num.length perchè in futuro potrebbe cambiare la dimensione dell'array num;
+  let cellmedia = document.createElement("td");
+  cellmedia.innerHTML = media;
+  rigaMedia.appendChild(cellmedia);
+
+  //trovo il massimo e il minimo
+  let max = -100;
+  let min = 100;
+  for (let n of num) {
+    if (n > max) max = n;
+    if (n < min) min = n;
+  }
+
+  console.log("max:" + max);
+  console.log("min:" + min);
+  let cellmax = document.createElement("td");
+  cellmax.innerHTML = max;
+  rigaMaxMin.appendChild(cellmax);
+
+  let cellmin = document.createElement("td");
+  cellmin.innerHTML = min;
+  rigaMaxMin.appendChild(cellmin);
+
+  //numeri maggiori di 50
+  let mag50 = [];
   for (let n of num) {
     if (n > 50) {
+      let cellMag50 = document.createElement("td");
+      cellMag50.innerHTML = n;
+      rigaMag50.appendChild(cellMag50);
       mag50.push(n);
     }
   }
 </script>
-</body>
-</html
+
+</html>
