@@ -7,13 +7,8 @@
         var cognome=document.getElementById("cognome").value
         var indirizzo=document.getElementById("indirizzo").value
 
-        // NUOVA PARTE DI CODICE: Costruzione e inserimento della Tabella
-        var tabellaHTML = `
-            <table>
-                <tr>
-                    <th>Campo</th>
-                    <th>Valore</th>
-                </tr>
+        var tabellaHTML {
+            <table
                 <tr>
                     <td>Nome</td>
                     <td>${nome}</td>
@@ -27,9 +22,8 @@
                     <td>${indirizzo}</td>
                 </tr>
             </table>
-        `;
+        }
         document.getElementById("tabellaOutput").innerHTML = tabellaHTML;
-        // Fine NUOVA PARTE DI CODICE
 
         document.getElementById("nome1").innerHTML=nome
         document.getElementById("cognome1").innerHTML=cognome
@@ -53,7 +47,6 @@
     <p id="indirizzo1"></p>
 
         <div id="tabellaOutput" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
-        La tabella apparirà qui.
     </div>
 
   </body>
