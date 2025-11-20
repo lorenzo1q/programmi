@@ -1,122 +1,60 @@
 <!DOCTYPE html>
-<html lang="it">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Modulo con Tabella Output</title>
-    <style>
-        /* CSS Semplice per affiancare gli elementi */
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-            display: flex; /* Abilita flexbox per affiancare */
-            gap: 40px;
-        }
+<html>
+  <head>
+    <script>
+      function stampa(){
+        var nome=document.getElementById("nome").value
+        var cognome=document.getElementById("cognome").value
+        var indirizzo=document.getElementById("indirizzo").value
 
-        #input-container {
-            flex: 1; /* Spazio per gli input */
-        }
+        // NUOVA PARTE DI CODICE: Costruzione e inserimento della Tabella
+        var tabellaHTML = `
+            <table>
+                <tr>
+                    <th>Campo</th>
+                    <th>Valore</th>
+                </tr>
+                <tr>
+                    <td>Nome</td>
+                    <td>${nome}</td>
+                </tr>
+                <tr>
+                    <td>Cognome</td>
+                    <td>${cognome}</td>
+                </tr>
+                <tr>
+                    <td>Indirizzo</td>
+                    <td>${indirizzo}</td>
+                </tr>
+            </table>
+        `;
+        document.getElementById("tabellaOutput").innerHTML = tabellaHTML;
+        // Fine NUOVA PARTE DI CODICE
 
-        #output-container {
-            flex: 2; /* Più spazio per l'output a destra */
-            padding: 20px;
-            border: 2px solid #007bff;
-            border-radius: 8px;
-            background-color: #f0f8ff;
-        }
+        document.getElementById("nome1").innerHTML=nome
+        document.getElementById("cognome1").innerHTML=cognome
+        document.getElementById("indirizzo1").innerHTML=indirizzo
+      }
+    </script>
+  </head>
+  <body>
+    <h1>
+      <input type="text"id="nome">
+    </h1>
+    <h2>
+      <input type="text"id="cognome">
+    </h2>
+    <h3>
+       <input type="text"id="indirizzo">
+    </h3>
+    <input type="button" value="cliccami" onclick="stampa()">
+    <p id="nome1"></p>
+    <p id="cognome1"></p>
+    <p id="indirizzo1"></p>
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin-top: 15px;
-        }
-
-        th, td {
-            border: 1px solid #ddd;
-            padding: 10px;
-            text-align: left;
-        }
-
-        th {
-            background-color: #007bff;
-            color: white;
-        }
-        
-        /* Stili per gli input */
-        input[type="text"] {
-            width: 100%;
-            padding: 8px;
-            margin-bottom: 10px;
-            box-sizing: border-box; /* Assicura che padding e border siano inclusi nella larghezza */
-        }
-
-        input[type="button"] {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-    </style>
-    <script>
-        function stampa() {
-            // 1. Recupera i valori dai campi di input
-            var nome = document.getElementById("nome").value;
-            var cognome = document.getElementById("cognome").value;
-            var indirizzo = document.getElementById("indirizzo").value;
-
-            // 2. Costruisce la tabella HTML con i dati
-            // NOTA: Usiamo il template literal (`) per creare l'HTML della tabella
-            var tabellaHTML = `
-                <h3>Dati Utente Inseriti</h3>
-                <table>
-                    <tr>
-                        <th>Campo</th>
-                        <th>Valore</th>
-                    </tr>
-                    <tr>
-                        <td>Nome</td>
-                        <td>${nome}</td>
-                    </tr>
-                    <tr>
-                        <td>Cognome</td>
-                        <td>${cognome}</td>
-                    </tr>
-                    <tr>
-                        <td>Indirizzo</td>
-                        <td>${indirizzo}</td>
-                    </tr>
-                </table>
-            `;
-
-            // 3. Inserisce la tabella nel div di output
-            document.getElementById("datiOutput").innerHTML = tabellaHTML;
-        }
-    </script>
-</head>
-<body>
-
-    <div id="input-container">
-        <h2>Inserimento Dati</h2>
-        <label for="nome">Nome:</label>
-        <input type="text" id="nome">
-        
-        <label for="cognome">Cognome:</label>
-        <input type="text" id="cognome">
-        
-        <label for="indirizzo">Indirizzo:</label>
-        <input type="text" id="indirizzo">
-        
-        <input type="button" value="Visualizza Dati" onclick="stampa()">
-    </div>
-    
-    <div id="output-container">
-        <h2>Area di Output</h2>
-        <div id="datiOutput">
-            <p>I dati appariranno qui sotto forma di tabella.</p>
-        </div>
+        <div id="tabellaOutput" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+        La tabella apparirà qui.
     </div>
 
-</body>
+  </body>
 </html>
