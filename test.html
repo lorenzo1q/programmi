@@ -1,53 +1,50 @@
 <!DOCTYPE html>
 <html>
-  <head> 
-    <script>
-      function stampa(){
-        var nome=document.getElementById("nome").value
-        var cognome=document.getElementById("cognome").value
-        var indirizzo=document.getElementById("indirizzo").value
+  <head>
+    <script>
+      function stampa(){
+        let nome=document.getElementById("nome").value
+        let cognome=document.getElementById("cognome").value
+        let indirizzo=document.getElementById("indirizzo").value
+        document.getElementById("nome1").innerHTML=nome
+        document.getElementById("cognome1").innerHTML=cognome
+        document.getElementById("indirizzo1").innerHTML=indirizzo
 
-        var tabellaHTML {
-            <table
-                <tr>
-                    <td>Nome</td>
-                    <td>${nome}</td>
-                </tr>
-                <tr>
-                    <td>Cognome</td>
-                    <td>${cognome}</td>
-                </tr>
-                <tr>
-                    <td>Indirizzo</td>
-                    <td>${indirizzo}</td>
-                </tr>
-            </table>
-        }
-        document.getElementById("tabellaOutput").innerHTML = tabellaHTML;
+        let cellNome = document.createElement('td');
+        cellNome.innerHTML = nome;
+        nome.appendChild(cellNome);
 
-        document.getElementById("nome1").innerHTML=nome
-        document.getElementById("cognome1").innerHTML=cognome
-        document.getElementById("indirizzo1").innerHTML=indirizzo
-      }
-    </script>
-  </head>
-  <body>
-    <h1>
-      <input type="text"id="nome">
-    </h1>
-    <h2>
-      <input type="text"id="cognome">
-    </h2>
-    <h3>
-       <input type="text"id="indirizzo">
-    </h3>
-    <input type="button" value="cliccami" onclick="stampa()">
-    <p id="nome1"></p>
-    <p id="cognome1"></p>
-    <p id="indirizzo1"></p>
+      }
+    </script>
+  </head>
+  <body>
+    <table id="tabella">
+    <tr id="riga-nome">
+      <td style="font-weight: bold;">"nome:</td>
+    </tr>
 
-        <div id="tabellaOutput" style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
-    </div>
+     <tr id="riga-cognome">
+      <td style="font-weight: bold;">cognome: </td>
+    </tr>
 
-  </body>
+     <tr id="riga-indirizzo">
+      <td style="font-weight: bold;">indirizzo: </td>
+    </tr> 
+    <h1>
+      <input type="text"id="nome">
+    </h1>
+    <h2>
+      <input type="text"id="cognome">
+    </h2>
+    <h3>
+       <input type="text"id="indirizzo">
+    </h3>
+    <input type="button" value="cliccami" onclick="stampa()">
+    <p id="nome1"></p>
+    <p id="cognome1"></p>
+    <p id="indirizzo1"></p>
+
+    
+
+  </body>
 </html>
