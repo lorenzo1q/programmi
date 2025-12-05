@@ -4,6 +4,7 @@
 <title>Anagrafica</title>
 </head>
 <body>
+
 <h2>Inserisci i tuoi dati:</h2>
 
 <input type="text" id="nome"><br>
@@ -37,12 +38,14 @@
 
 <br><br>
 
-<!-- ******* SEZIONE PROVINCIA — SPOSTATA QUI IN FONDO ******** -->
+<!-- ========================= -->
+<!--  PROVINCIA SPOSTATA QUI  -->
+<!-- ========================= -->
 
-<h5>inserisci la provincia:</h5>
+<h5>Inserisci la provincia:</h5>
 
 <div style="margin-left:100px;">
-    <div id="div0" style="position: absolute; top: 0px; left: 100px;">
+    <div id="div0">
         <select id="prov" onchange="Validate()">
             <option value="0">Select</option>
             <option value="1">Milano</option>
@@ -50,7 +53,7 @@
         </select>
     </div>
 
-    <div id="div1" style="visibility: hidden; position: absolute; left: 100px; top: 20px;">
+    <div id="div1" style="visibility: hidden; margin-top:10px;">
         <select id="comMI" onchange="scelta_MI()">
             <option value="0">Select</option>
             <option value="1">Rho</option>
@@ -59,7 +62,7 @@
         </select>
     </div>
 
-    <div id="div2" style="visibility: hidden; position: absolute; left: 100px; top: 20px;">
+    <div id="div2" style="visibility: hidden; margin-top:10px;">
         <select id="comPV" onchange="scelta_PV()">
             <option value="0">Select</option>
             <option value="1">Vigevano</option>
@@ -68,8 +71,6 @@
         </select>
     </div>
 </div>
-
-<!-- ******* FINE SEZIONE PROVINCIA ******** -->
 
 <br><br>
 
@@ -80,6 +81,7 @@
 
 <script>
 function mostraAnagrafica() {
+
 var nome = document.getElementById("nome").value;
 var cognome = document.getElementById("cognome").value;
 var indirizzo = document.getElementById("indirizzo").value;
@@ -99,6 +101,8 @@ else if (anno >= 1981 && anno <= 1996) generazione = "Millennials";
 else if (anno >= 1997 && anno <= 2012) generazione = "Generazione Z";
 else if (anno >= 2013) generazione = "Generazione Alpha";
 else generazione = "Anno non valido";
+
+}
 
 function Validate() {
     let e = document.getElementById("prov");
@@ -140,16 +144,6 @@ function scelta_PV() {
 
 function sped(x, y) {
     document.location.href = "stampa_prov.html?prov=" + x + "&cit=" + y;
-}
-
-document.getElementById("output").innerHTML =
-    "<b>Nome:</b> " + nome + "<br>" +
-    "<b>Cognome:</b> " + cognome + "<br>" +
-    "<b>Indirizzo:</b> " + indirizzo + "<br>" +
-    "<b>Città:</b> " + citta + "<br>" +
-    "<b>CAP:</b> " + cap + "<br>" +
-    "<b>Anno di nascita:</b> " + anno + "<br>" +
-    "<b>Generazione:</b> " + generazione;
 }
 </script>
 
