@@ -1,50 +1,158 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <script>
-      function stampa(){
-        let nome=document.getElementById("nome").value
-        let cognome=document.getElementById("cognome").value
-        let indirizzo=document.getElementById("indirizzo").value
-        document.getElementById("nome1").innerHTML=nome
-        document.getElementById("cognome1").innerHTML=cognome
-        document.getElementById("indirizzo1").innerHTML=indirizzo
+<head>
+<title>Anagrafica</title>
+</head>
+<body>
+<h2>Inserisci i tuoi dati:</h2>
 
-        let cellNome = document.createElement('td');
-        cellNome.innerHTML = nome;
-        nome.appendChild(cellNome);
+<input type="text" id="nome"><br>
+<input type="text" id="cognome"><br>
+<input type="text" id="indirizzo"><br>
+<input type="text" id="citta"><br>
+<input type="text" id="cap"><br>
+<input type="date" id="dataNascita"><br><br>
 
-      }
-    </script>
-  </head>
-  <body>
-    <table id="tabella">
-    <tr id="riga-nome">
-      <td style="font-weight: bold;">"nome:</td>
-    </tr>
+<h3>inserisci il sesso:</h3>
 
-     <tr id="riga-cognome">
-      <td style="font-weight: bold;">cognome: </td>
-    </tr>
+<input type="radio" id="maschio" name="sesso" value="maschio">
+<label for="maschio">maschio</label><br>
+<input type="radio" id="femmina" name="sesso" value="femmina">
+<label for="femmina">femmina</label><br>
+<input type="radio" id="specifica" name="no specifica" value="specifica">
+<label for="specifica">preferisco non specificarlo</label>
 
-     <tr id="riga-indirizzo">
-      <td style="font-weight: bold;">indirizzo: </td>
-    </tr> 
-    <h1>
-      <input type="text"id="nome">
-    </h1>
-    <h2>
-      <input type="text"id="cognome">
-    </h2>
-    <h3>
-       <input type="text"id="indirizzo">
-    </h3>
-    <input type="button" value="cliccami" onclick="stampa()">
-    <p id="nome1"></p>
-    <p id="cognome1"></p>
-    <p id="indirizzo1"></p>
+<h4>Inserisci il tuo mezzo di trasporto preferito:</h4>
 
-    
+<input type="checkbox" id="mezzo1" name="mezzo1" value="bici">
+<label for="mezzo1"> bici</label><br>
+<input type="checkbox" id="mezzo2" name="mezzo2" value="macchina">
+<label for="mezzo2"> macchina</label><br>
+<input type="checkbox" id="mezzo3" name="mezzo3" value="barca">
+<label for="mezzo3"> barca</label><br>
+<input type="checkbox" id="mezzo4" name="mezzo4" value="aereo">
+<label for="mezzo4"> aereo</label><br>
+<input type="checkbox" id="mezzo5" name="mezzo5" value="deltaplano">
+<label for="mezzo5"> deltaplano</label><br>
 
-  </body>
+<br><br>
+
+<!-- ******* SEZIONE PROVINCIA — SPOSTATA QUI IN FONDO ******** -->
+
+<h5>inserisci la provincia:</h5>
+
+<div style="margin-left:100px;">
+    <div id="div0" style="position: absolute; top: 0px; left: 100px;">
+        <select id="prov" onchange="Validate()">
+            <option value="0">Select</option>
+            <option value="1">Milano</option>
+            <option value="2">Pavia</option>
+        </select>
+    </div>
+
+    <div id="div1" style="visibility: hidden; position: absolute; left: 100px; top: 20px;">
+        <select id="comMI" onchange="scelta_MI()">
+            <option value="0">Select</option>
+            <option value="1">Rho</option>
+            <option value="2">Lainate</option>
+            <option value="3">Parabiago</option>
+        </select>
+    </div>
+
+    <div id="div2" style="visibility: hidden; position: absolute; left: 100px; top: 20px;">
+        <select id="comPV" onchange="scelta_PV()">
+            <option value="0">Select</option>
+            <option value="1">Vigevano</option>
+            <option value="2">Zavattarello</option>
+            <option value="3">Godiasco</option>
+        </select>
+    </div>
+</div>
+
+<!-- ******* FINE SEZIONE PROVINCIA ******** -->
+
+<br><br>
+
+<button onclick="mostraAnagrafica()">Invia</button>
+
+<h3>Risultato:</h3>
+<div id="output"></div>
+
+<script>
+function mostraAnagrafica() {
+var nome = document.getElementById("nome").value;
+var cognome = document.getElementById("cognome").value;
+var indirizzo = document.getElementById("indirizzo").value;
+var citta = document.getElementById("citta").value;
+var cap = document.getElementById("cap").value;
+var data = document.getElementById("dataNascita").value;
+
+var anno = new Date(data).getFullYear();
+
+var generazione = "";
+
+if (anno >= 1901 && anno <= 1927) generazione = "Greatest Generation";
+else if (anno >= 1928 && anno <= 1945) generazione = "Generazione Silenziosa";
+else if (anno >= 1946 && anno <= 1964) generazione = "Baby Boomers";
+else if (anno >= 1965 && anno <= 1980) generazione = "Generazione X";
+else if (anno >= 1981 && anno <= 1996) generazione = "Millennials";
+else if (anno >= 1997 && anno <= 2012) generazione = "Generazione Z";
+else if (anno >= 2013) generazione = "Generazione Alpha";
+else generazione = "Anno non valido";
+
+function Validate() {
+    let e = document.getElementById("prov");
+    let provincia = e.options[e.selectedIndex].value;
+
+    if(provincia == 0){
+        document.getElementById("div1").style.visibility = "hidden";
+        document.getElementById("div2").style.visibility = "hidden";
+    }
+    else if (provincia == 1){
+        document.getElementById("div1").style.visibility = "visible";
+        document.getElementById("div2").style.visibility = "hidden";
+    }
+    else if (provincia == 2){
+        document.getElementById("div1").style.visibility = "hidden";
+        document.getElementById("div2").style.visibility = "visible";
+    }
+}
+
+function scelta_MI() {
+    let e = document.getElementById("prov");
+    let prov = e.options[e.selectedIndex].text;
+
+    let f = document.getElementById("comMI");
+    let citta = f.options[f.selectedIndex].text;
+
+    sped(prov, citta);
+}
+
+function scelta_PV() {
+    let e = document.getElementById("prov");
+    let prov = e.options[e.selectedIndex].text;
+
+    let f = document.getElementById("comPV");
+    let citta = f.options[f.selectedIndex].text;
+
+    sped(prov, citta);
+}
+
+function sped(x, y) {
+    document.location.href = "stampa_prov.html?prov=" + x + "&cit=" + y;
+}
+
+document.getElementById("output").innerHTML =
+    "<b>Nome:</b> " + nome + "<br>" +
+    "<b>Cognome:</b> " + cognome + "<br>" +
+    "<b>Indirizzo:</b> " + indirizzo + "<br>" +
+    "<b>Città:</b> " + citta + "<br>" +
+    "<b>CAP:</b> " + cap + "<br>" +
+    "<b>Anno di nascita:</b> " + anno + "<br>" +
+    "<b>Generazione:</b> " + generazione;
+}
+</script>
+
+</body>
 </html>
+
