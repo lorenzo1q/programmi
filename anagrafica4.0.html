@@ -1,18 +1,15 @@
 <!DOCTYPE html>
-<html lang="it">
+<html >
 <head>
-  <meta charset="UTF-8">
+ 
   <title>Anagrafica Utente</title>
-
 </head>
 <body>
   <h2>Inserisci Anagrafica Utente</h2>
-<!--inserire input -->
   <form id="anagraficaForm">
     <label>Nome:
       <input type="text" id="nome" required>
     </label>
-
     <label>Cognome:
       <input type="text" id="cognome" required>
     </label>
@@ -36,12 +33,11 @@
     <option value="milano">milano</option>
     <option value="novara">novara</option>
     <option value="monza">monza</option>
-    
 </select>
 <select name="materie_preferite" id="materie" multiple>
-        <option value="matematica">Matematica</option>
-        <option value="italiano">Italiano</option>
-        <option value="storia">Storia</option>
+        <option value="motoria">motoria</option>
+        <option value="storia">storia</option>
+        <option value="inglese">inglese</option>
     </select>
     <label>Città:
       <input type="text" id="citta" required>
@@ -54,7 +50,6 @@
     <label>Data di nascita:
       <input type="date" id="dataNascita" required>
     </label>
-<!-- richiamo funzione calcolaGenerazione-->
     <button type="button" onclick="calcolaGenerazione()">Invia</button>
   </form>
 
@@ -62,7 +57,6 @@
 
   <script>
     function calcolaGenerazione() {
-    // get valore input e altre variabili
       nome = document.getElementById('nome').value;
       cognome = document.getElementById('cognome').value;
       indirizzo = document.getElementById('indirizzo').value;
@@ -84,11 +78,9 @@
 
 
 
-annoNascita = new Date(dataNascita).getFullYear(); //estrae anno da dataNascita per fare calcoli per generazione
-      eta = new Date().getFullYear() - annoNascita; //cacolo eta sottraendo l anno corrente con anno di nascita
-
+annoNascita = new Date(dataNascita).getFullYear(); 
+      eta = new Date().getFullYear() - annoNascita; 
       generazione = '';
-      //utilizzo switch per calcolare generazione mettere true simulare condizione cpm operazioni <>
       switch(true){
         case annoNascita >= 2013:
           generazione = 'Generazione Alpha';
