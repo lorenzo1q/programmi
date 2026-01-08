@@ -1,44 +1,45 @@
 <!DOCTYPE html>
 <html>
  <head>
-   <meta charset = "utf-8">
-   <title>Stella con Cerchio Colorato</title>
+
+   <title>Stella e cerchio</title>
  </head>
  <body>
-   <canvas id = "drawLines" width = "400" height = "200" style = "border: 1px solid Black;"></canvas>
+   <canvas id = "drawLines" width = "400" height = "200" style = "border: 1px solid Black;">
+   </canvas>
    
    <script>
      var canvas = document.getElementById("drawLines");
      var context = canvas.getContext("2d");
 
-     // Sfondo del rettangolo
+
      context.fillStyle = "blue";
      context.fillRect(0, 0, canvas.width, canvas.height);
 
-     // --- DISEGNO DEL CERCHIO COLORATO ---
+ 
      context.beginPath();
      context.arc(200, 100, 100, 0, Math.PI * 2);
      
-     // Colore interno del cerchio
-   
-     
-     // Colore del bordo del cerchio
+    
      context.strokeStyle = "cyan";
      context.lineWidth = 1;
      context.stroke();
 
-     // --- DISEGNO DELLA STELLA ---
-     context.beginPath(); 
-     context.moveTo(200, 0);   
-     context.lineTo(224, 69); context.lineTo(295, 69);   
-     context.lineTo(237, 112); context.lineTo(259, 181);  
-     context.lineTo(200, 138); context.lineTo(141, 181);  
-     context.lineTo(163, 112); context.lineTo(105, 69);   
-     context.lineTo(176, 69);   
-     context.closePath(); 
+
+    context.beginPath(); 
+    context.moveTo(200, 0);   
+    context.lineTo(224, 69); 
+    context.lineTo(295, 69);   
+    context.lineTo(237, 112); 
+    context.lineTo(259, 181);  
+    context.lineTo(200, 138); 
+    context.lineTo(141, 181);  
+    context.lineTo(163, 112); 
+    context.lineTo(105, 69);   
+    context.lineTo(176, 69);   
+    context.closePath(); 
      
-     context.fillStyle = "gold";
-     context.fill();
+
      context.strokeStyle = "white";
      context.stroke();
    </script>
