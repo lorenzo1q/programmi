@@ -2,7 +2,7 @@
 <html>
  <head>
    <meta charset = "utf-8">
-   <title>Stella nel Cerchio</title>
+   <title>Stella nel Cerchio - Proporzionata</title>
  </head>
  <body>
    <canvas id = "drawLines" width = "400" height = "200" 
@@ -13,38 +13,47 @@
      var canvas = document.getElementById("drawLines");
      var context = canvas.getContext("2d");
 
-     // --- DISEGNO DEL CERCHIO ---
+     // 1. Sfondo colorato del rettangolo
+     context.fillStyle = "midnightblue";
+     context.fillRect(0, 0, canvas.width, canvas.height);
+
+     // 2. Disegno del cerchio (deve avere raggio 100 per toccare y=0 e y=200)
      context.beginPath();
-     // Centro (200, 100), Raggio 100, da 0 a 2*PI (giro completo)
-     context.arc(200, 100, 100, 0, 2 * Math.PI);
-     context.strokeStyle = "lightgray"; // Colore cerchio
-     context.lineWidth = 1;
+     context.arc(200, 100, 100, 0, Math.PI * 2);
+     context.strokeStyle = "white";
+     context.lineWidth = 2;
      context.stroke();
 
-     // --- DISEGNO DELLA STELLA ---
+     // 3. Disegno della stella (coordinate proporzionate)
      context.beginPath(); 
-     // Punta superiore (Tocca il margine alto e il cerchio)
+     
+     // Punta superiore (y=0, tocca il cerchio e il margine alto)
      context.moveTo(200, 0);   
-     context.lineTo(225, 75);   
-     context.lineTo(295, 75);   
-     context.lineTo(235, 120);  
-     // Punta in basso a destra (Tocca il margine basso e il cerchio)
-     context.lineTo(259, 195);  
-     context.lineTo(200, 150);  
-     // Punta in basso a sinistra (Tocca il margine basso e il cerchio)
-     context.lineTo(140, 195);  
-     context.lineTo(165, 120);  
-     context.lineTo(105, 75);   
-     context.lineTo(175, 75);   
      
-     context.closePath(); 
+     context.lineTo(224, 69);   // Rientranza destra-alto
+     context.lineTo(295, 69);   // Punta destra (tocca il cerchio)
+     context.lineTo(237, 112);  // Rientranza destra-basso
      
-     // Stile stella
-     context.lineWidth = 2;
-     context.strokeStyle = "blue";
-     context.stroke();
+     // Punta basso-destra (y=181, tocca il cerchio)
+     context.lineTo(259, 181);  
+     
+     context.lineTo(200, 138);  // Rientranza centrale-basso
+     
+     // Punta basso-sinistra (y=181, tocca il cerchio)
+     context.lineTo(141, 181);  
+     
+     context.lineTo(163, 112);  // Rientranza sinistra-basso
+     context.lineTo(105, 69);   // Punta sinistra (tocca il cerchio)
+     context.lineTo(176, 69);   // Rientranza sinistra-alto
+     
+     context.closePath();       // Torna alla punta superiore (200, 0)
+     
+     // Stile della stella
      context.fillStyle = "gold";
      context.fill();
+     context.lineWidth = 2;
+     context.strokeStyle = "yellow";
+     context.stroke();
    </script>
  </body>
 </html>
