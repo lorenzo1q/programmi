@@ -1,39 +1,46 @@
-<!DOCTYPE html>
 <html>
-    <head>
+ <head>
    <meta charset = "utf-8">
-   <title>Drawing Lines</title>
+   <title>Drawing Lines - Stella ai Margini</title>
  </head>
  <body>
    <canvas id = "drawLines" width = "400" height = "200" 
      style = "border: 1px solid Black;">
    </canvas>
-   
    <script>
      var canvas = document.getElementById("drawLines");
      var context = canvas.getContext("2d");
 
      context.beginPath(); 
-     // Spostiamo le coordinate per farle stare nel canvas 400x200
-     context.moveTo(200, 20);   // Punta superiore
-     context.lineTo(225, 80);   // Rientranza destra superiore
-     context.lineTo(290, 80);   // Punta destra
-     context.lineTo(235, 120);  // Rientranza destra inferiore
-     context.lineTo(260, 180);  // Punta in basso a destra
-     context.lineTo(200, 140);  // Rientranza centrale basso
-     context.lineTo(140, 180);  // Punta in basso a sinistra
-     context.lineTo(165, 120);  // Rientranza sinistra inferiore
-     context.lineTo(110, 80);   // Punta sinistra
-     context.lineTo(175, 80);   // Rientranza sinistra superiore
+     // Punta superiore: tocca il margine alto (y = 0)
+     context.moveTo(200, 0); 
      
-     context.closePath();       // Chiude la figura tornando al punto iniziale
+     context.lineTo(235, 75);
+     // Punta destra
+     context.lineTo(380, 75); 
+     
+     context.lineTo(265, 125);
+     // Punta basso destra: tocca il margine basso (y = 200)
+     context.lineTo(310, 200); 
+     
+     context.lineTo(200, 150);
+     // Punta basso sinistra: tocca il margine basso (y = 200)
+     context.lineTo(90, 200); 
+     
+     context.lineTo(135, 125);
+     // Punta sinistra
+     context.lineTo(20, 75); 
+     
+     context.lineTo(165, 75);
+     
+     context.closePath(); // Torna alla punta superiore (200, 0)
      
      // Stile
+     context.strokeStyle = "black";
      context.lineWidth = 2;
-     context.strokeStyle = "blue";
      context.stroke();
      
-     // Opzionale: riempimento
+     // Riempimento opzionale per vedere meglio la forma
      context.fillStyle = "gold";
      context.fill();
    </script>
