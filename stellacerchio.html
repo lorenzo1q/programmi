@@ -12,35 +12,44 @@
      var context = canvas.getContext("2d");
 
      context.beginPath(); 
-     // Punta superiore: tocca il margine alto (y = 0)
+     
+     // 1. PUNTA SUPERIORE: y = 0 (Tocca il margine alto)
      context.moveTo(200, 0); 
      
-     context.lineTo(235, 75);
-     // Punta destra
-     context.lineTo(380, 75); 
+     // 2. Rientranza destra superiore
+     context.lineTo(245, 70);
      
-     context.lineTo(265, 125);
-     // Punta basso destra: tocca il margine basso (y = 200)
-     context.lineTo(310, 200); 
+     // 3. PUNTA DESTRA: x = 400 (Tocca il margine destro)
+     context.lineTo(400, 70); 
      
-     context.lineTo(200, 150);
-     // Punta basso sinistra: tocca il margine basso (y = 200)
-     context.lineTo(90, 200); 
+     // 4. Rientranza destra inferiore
+     context.lineTo(275, 120);
      
-     context.lineTo(135, 125);
-     // Punta sinistra
-     context.lineTo(20, 75); 
+     // 5. PUNTA BASSO DESTRA: y = 200 (Tocca il margine basso)
+     context.lineTo(325, 200); 
      
-     context.lineTo(165, 75);
+     // 6. Rientranza centrale basso
+     context.lineTo(200, 155);
      
-     context.closePath(); // Torna alla punta superiore (200, 0)
+     // 7. PUNTA BASSO SINISTRA: y = 200 (Tocca il margine basso)
+     context.lineTo(75, 200); 
+     
+     // 8. Rientranza sinistra inferiore
+     context.lineTo(125, 120);
+     
+     // 9. PUNTA SINISTRA: x = 0 (Tocca il margine sinistro)
+     context.lineTo(0, 70); 
+     
+     // 10. Rientranza sinistra superiore
+     context.lineTo(155, 70);
+     
+     context.closePath(); 
      
      // Stile
-     context.strokeStyle = "black";
+     context.strokeStyle = "red";
      context.lineWidth = 2;
      context.stroke();
      
-     // Riempimento opzionale per vedere meglio la forma
      context.fillStyle = "gold";
      context.fill();
    </script>
