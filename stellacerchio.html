@@ -1,56 +1,36 @@
 <!DOCTYPE html>
 <html>
  <head>
-   <meta charset = "utf-8">
-   <title>Stella nel Cerchio - Proporzionata</title>
+   <title>Stella e Cerchio</title>
  </head>
  <body>
    <canvas id = "drawLines" width = "400" height = "200" 
      style = "border: 1px solid Black;">
    </canvas>
-   
    <script>
      var canvas = document.getElementById("drawLines");
      var context = canvas.getContext("2d");
 
-     // 1. Sfondo colorato del rettangolo
-     context.fillStyle = "midnightblue";
+     
+     context.fillStyle = "black";
      context.fillRect(0, 0, canvas.width, canvas.height);
-
-     // 2. Disegno del cerchio (deve avere raggio 100 per toccare y=0 e y=200)
      context.beginPath();
      context.arc(200, 100, 100, 0, Math.PI * 2);
      context.strokeStyle = "white";
      context.lineWidth = 2;
      context.stroke();
-
-     // 3. Disegno della stella (coordinate proporzionate)
      context.beginPath(); 
-     
-     // Punta superiore (y=0, tocca il cerchio e il margine alto)
      context.moveTo(200, 0);   
-     
-     context.lineTo(224, 69);   // Rientranza destra-alto
-     context.lineTo(295, 69);   // Punta destra (tocca il cerchio)
-     context.lineTo(237, 112);  // Rientranza destra-basso
-     
-     // Punta basso-destra (y=181, tocca il cerchio)
+     context.lineTo(224, 69);  
+     context.lineTo(295, 69);  
+     context.lineTo(237, 112);  
      context.lineTo(259, 181);  
-     
-     context.lineTo(200, 138);  // Rientranza centrale-basso
-     
-     // Punta basso-sinistra (y=181, tocca il cerchio)
+     context.lineTo(200, 138); 
      context.lineTo(141, 181);  
-     
-     context.lineTo(163, 112);  // Rientranza sinistra-basso
-     context.lineTo(105, 69);   // Punta sinistra (tocca il cerchio)
-     context.lineTo(176, 69);   // Rientranza sinistra-alto
-     
-     context.closePath();       // Torna alla punta superiore (200, 0)
-     
-     // Stile della stella
-     context.fillStyle = "gold";
-     context.fill();
+     context.lineTo(163, 112);  
+     context.lineTo(105, 69);  
+     context.lineTo(176, 69);  
+     context.closePath();       
      context.lineWidth = 2;
      context.strokeStyle = "yellow";
      context.stroke();
