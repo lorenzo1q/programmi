@@ -1,7 +1,7 @@
 <html>
  <head>
    <meta charset = "utf-8">
-   <title>Drawing Lines - Stella ai Margini</title>
+   <title>Stella ai Margini Esatti</title>
  </head>
  <body>
    <canvas id = "drawLines" width = "400" height = "200" 
@@ -13,45 +13,46 @@
 
      context.beginPath(); 
      
-     // 1. PUNTA SUPERIORE: y = 0 (Tocca il margine alto)
+     // 1. PUNTA SUPERIORE: y=0 (Tocca il bordo in alto)
      context.moveTo(200, 0); 
      
-     // 2. Rientranza destra superiore
-     context.lineTo(245, 70);
+     // 2. Rientranza destra-alto
+     context.lineTo(250, 75);
      
-     // 3. PUNTA DESTRA: x = 400 (Tocca il margine destro)
-     context.lineTo(400, 70); 
+     // 3. PUNTA DESTRA: x=400 (Tocca il bordo destro)
+     context.lineTo(400, 75); 
      
-     // 4. Rientranza destra inferiore
-     context.lineTo(275, 120);
+     // 4. Rientranza destra-basso
+     context.lineTo(280, 125);
      
-     // 5. PUNTA BASSO DESTRA: y = 200 (Tocca il margine basso)
-     context.lineTo(325, 200); 
+     // 5. PUNTA BASSO-DESTRA: y=200 (Tocca il bordo in basso)
+     context.lineTo(330, 200); 
      
      // 6. Rientranza centrale basso
-     context.lineTo(200, 155);
+     context.lineTo(200, 150);
      
-     // 7. PUNTA BASSO SINISTRA: y = 200 (Tocca il margine basso)
-     context.lineTo(75, 200); 
+     // 7. PUNTA BASSO-SINISTRA: y=200 (Tocca il bordo in basso)
+     context.lineTo(70, 200); 
      
-     // 8. Rientranza sinistra inferiore
-     context.lineTo(125, 120);
+     // 8. Rientranza sinistra-basso
+     context.lineTo(120, 125);
      
-     // 9. PUNTA SINISTRA: x = 0 (Tocca il margine sinistro)
-     context.lineTo(0, 70); 
+     // 9. PUNTA SINISTRA: x=0 (Tocca il bordo sinistro)
+     context.lineTo(0, 75); 
      
-     // 10. Rientranza sinistra superiore
-     context.lineTo(155, 70);
+     // 10. Rientranza sinistra-alto
+     context.lineTo(150, 75);
      
      context.closePath(); 
      
-     // Stile
-     context.strokeStyle = "red";
-     context.lineWidth = 2;
-     context.stroke();
-     
+     // Stile: usiamo fill per assicurarci che il colore arrivi al bordo
      context.fillStyle = "gold";
      context.fill();
+     
+     // Il tratto (stroke)
+     context.strokeStyle = "black";
+     context.lineWidth = 1;
+     context.stroke();
    </script>
  </body>
 </html>
