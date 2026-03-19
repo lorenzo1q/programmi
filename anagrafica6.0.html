@@ -2,18 +2,21 @@
 <html>
 
 <head>
-
     <title>Anagrafica Utente</title>
     <style>
         .container {
             display: flex;
             flex-direction: column;
             justify-content: space-evenly;
-            height: 700px;
+            min-height: 900px;
+        }
+        .error-msg {
+            color: red;
+            font-size: 0.8em;
+            font-weight: bold;
         }
     </style>
 </head>
-
 
 <body>
     <h2>Inserisci Anagrafica Utente</h2>
@@ -21,41 +24,49 @@
         <div class="container">
             <div>
                 <label>Nome:</label><br>
-                <input type="text" id="nome" pattern="[A-Za-zÀ-ÿ]+" required>  
+                <input type="text" id="nome" required>
+                <div id="pNomeTest" class="error-msg"></div>
             </div>
 
             <div>
                 <label>Cognome:</label><br>
-                <input type="text" id="cognome" pattern="[A-Za-zÀ-ÿ]+" required>
+                <input type="text" id="cognome" required>
+                <div id="pCognomeTest" class="error-msg"></div>
             </div>
 
             <div>
                 <label>Email:</label><br>
-                <input type="text" id ="email" pattern="^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$" required> 
+                <input type="text" id="email" required>
+                <div id="pEmailTest" class="error-msg"></div>
             </div>
 
             <div>
                 <label>Codice fiscale:</label><br>
-                <input type="text" id="codice" pattern="^[A-Z]{6}[0-9]{2}[A-Z][0-9]{2}[A-Z][0-9]{3}[A-Z]$" required> 
+                <input type="text" id="codFiscale" required>
+                <div id="pCodFiscaleTest" class="error-msg"></div>
             </div>
+
             <div>
                 <label>Indirizzo:</label><br>
                 <input type="text" id="indirizzo" required>
+                <div id="pIndirizzoTest" class="error-msg"></div>
             </div>
 
             <div>
                 <label>Città:</label><br>
                 <input type="text" id="citta" required>
+                <div id="pCittaTest" class="error-msg"></div>
             </div>
 
             <div>
                 <label>CAP:</label><br>
-                <input type="text" id="cap" pattern="^[0-9]{1,5}$" required>  
+                <input type="text" id="cap" required>
+                <div id="pCapTest" class="error-msg"></div>
             </div>
 
             <div>
                 <label>Provincia:</label><br>
-                <select name="provincia">
+                <select id="provincia" name="provincia">
                     <option value="milano">milano</option>
                     <option value="novara">novara</option>
                     <option value="monza">monza</option>
@@ -64,12 +75,12 @@
 
             <div>
                 <label>sesso:</label><br>
-                <input type="radio" name="sesso" value="maschio">
-                <label for="rosso">maschio</label><br>
-                <input type="radio" name="sesso" value="femmina">
-                <label for="verde">femmina</label><br>
-                <input type="radio" name="sesso" value="altro">
-                <label for="blu">altro</label><br>
+                <input type="radio" name="sesso" id="m" value="maschio">
+                <label for="m">maschio</label><br>
+                <input type="radio" name="sesso" id="f" value="femmina">
+                <label for="f">femmina</label><br>
+                <input type="radio" name="sesso" id="a" value="altro">
+                <label for="a">altro</label><br>
             </div>
 
             <div>
@@ -78,69 +89,148 @@
             </div>
 
             <div>
-                <label>mezzo di trasporto:</label><br>
-
-                <label for="vehicle1"> ho un auto</label>
-                <input type="checkbox" id="box1" name="auto" value="auto"
-                    onclick="onClickHandler(document.getElementById('box1').value)"><br>
-
-                <label for="vehicle2"> ho una bici</label>
-                <input type="checkbox" id="box2" name="bici" value="bici"
-                    onclick="onClickHandler(document.getElementById('box2').value)"><br>
-
-
-                <label for="vehicle3"> ho un cavallo</label>
-                <input type="checkbox" id="box3" name="cavallo" value="cavallo"
-                    onclick="onClickHandler(document.getElementById('box3').value)"><br>
+                <label>Anno di nascita (per verifica):</label><br>
+                <input type="text" id="annoNascita" placeholder="es. 1990">
+                <div id="pAnnoNascitaTest" class="error-msg"></div>
             </div>
 
             <div>
+                <label>mezzo di trasporto:</label><br>
+                <label for="box1"> ho un auto</label>
+                <input type="checkbox" id="box1" name="auto" value="auto"><br>
+                <label for="box2"> ho una bici</label>
+                <input type="checkbox" id="box2" name="bici" value="bici"><br>
+                <label for="box3"> ho un cavallo</label>
+                <input type="checkbox" id="box3" name="cavallo" value="cavallo"><br>
+            </div>
+
+            <div>
+                <label>materie preferite:</label><br>
                 <select name="materie_preferite" id="materie" multiple>
                     <option value="motoria">motoria</option>
                     <option value="storia">storia</option>
                     <option value="inglese">inglese</option>
                 </select>
             </div>
-
         </div>
 
         <a href="stampa.html">Stampa</a><br>
-
-        <button type="button" onclick="calcolaGenerazione()" style="margin-top:30px">Invia</button>
+        <button type="button" onclick="eseguiTutto()" style="margin-top:30px">Invia</button>
     </form>
 
-    <div class="output" id="risultato"></div>
+    <div class="output" id="risultato">
+        <div id="outnome"></div>
+        <div id="outcognome"></div>
+        <div id="outemail"></div>
+        <div id="outcodice"></div>
+        <div id="outindirizzo"></div>
+        <div id="outcitta"></div>
+        <div id="outcap"></div>
+        <div id="outdatanascita"></div>
+        <div id="outsesso"></div>
+        <div id="outmezzi"></div>
+        <div id="outprovincia"></div>
+    </div>
 
     <script>
-
         let elenco = [];
 
+        function controlla() {
+            let flag = false;
+
+            let nomeTest = document.getElementById("nome").value;
+            const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,50}$/;
+            if (nomeRegex.test(nomeTest) == false) {
+                document.getElementById("pNomeTest").innerHTML = "Nome non valido!";
+                flag = true;
+            } else {
+                document.getElementById("pNomeTest").innerHTML = "";
+            }
+
+            let cognomeTest = document.getElementById("cognome").value;
+            const cognomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+            if (cognomeRegex.test(cognomeTest) == false) {
+                document.getElementById("pCognomeTest").innerHTML = "Cognome non valido!";
+                flag = true;
+            } else {
+                document.getElementById("pCognomeTest").innerHTML = "";
+            }
+
+            let emailTest = document.getElementById("email").value;
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (emailRegex.test(emailTest) == false) {
+                document.getElementById("pEmailTest").innerHTML = "Email non valida!";
+                flag = true;
+            } else {
+                document.getElementById("pEmailTest").innerHTML = "";
+            }
+
+            let codFiscaleTest = document.getElementById("codFiscale").value;
+            const codFiscaleRegex = /^[A-Z]{6}[0-9]{2}[A-EHLMPRST][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i;
+            if (codFiscaleRegex.test(codFiscaleTest) == false) {
+                document.getElementById("pCodFiscaleTest").innerHTML = "Codice Fiscale non valido!";
+                flag = true;
+            } else {
+                document.getElementById("pCodFiscaleTest").innerHTML = "";
+            }
+
+            let cittaTest = document.getElementById("citta").value;
+            const cittaRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+            if (cittaRegex.test(cittaTest) == false) {
+                document.getElementById("pCittaTest").innerHTML = "Città non valida!";
+                flag = true;
+            } else {
+                document.getElementById("pCittaTest").innerHTML = "";
+            }
+
+            let indirizzoTest = document.getElementById("indirizzo").value;
+            const indirizzoRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s.,'\/-]{5,100}$/;
+            if (indirizzoRegex.test(indirizzoTest) == false) {
+                document.getElementById("pIndirizzoTest").innerHTML = "Indirizzo non valido!";
+                flag = true;
+            } else {
+                document.getElementById("pIndirizzoTest").innerHTML = "";
+            }
+
+            let capTest = document.getElementById("cap").value;
+            const capRegex = /^\d{5}$/;
+            if (capRegex.test(capTest) == false) {
+                document.getElementById("pCapTest").innerHTML = "CAP non valido!";
+                flag = true;
+            } else {
+                document.getElementById("pCapTest").innerHTML = "";
+            }
+
+            let annoTest = document.getElementById("annoNascita").value;
+            const annoRegex = /^(19\d{2}|20[0-2]\d)$/;
+            if (annoRegex.test(annoTest) == false) {
+                document.getElementById("pAnnoNascitaTest").innerHTML = "Anno di nascita non valido!";
+                flag = true;
+            } else {
+                document.getElementById("pAnnoNascitaTest").innerHTML = "";
+            }
+
+            return flag; 
+        }
+
         function calcolaGenerazione() {
-            let dataNascita = document.getElementById('dataNascita').value;
+            let dataNascitaInput = document.getElementById('dataNascita').value;
+            let sessoInput = document.querySelector('input[name="sesso"]:checked');
+            let mezziInput = document.querySelectorAll('input[type="checkbox"]:checked');
 
             let persona = {
                 nome: document.getElementById('nome').value,
                 cognome: document.getElementById('cognome').value,
                 email: document.getElementById('email').value,
-                codice: document.getElementById('codice').value,
+                codice: document.getElementById('codFiscale').value,
                 indirizzo: document.getElementById('indirizzo').value,
                 citta: document.getElementById('citta').value,
                 cap: document.getElementById('cap').value,
-                dataNascita: dataNascita,
-                sesso: document.querySelector('input[name="sesso"]:checked'),
-                mezzi: document.querySelectorAll('input[type="checkbox"]:checked'),
-                provincia: document.querySelector('select[name="provincia"]').value,
-                anno: new Date(dataNascita).getFullYear(),
-                eta: new Date().getFullYear() - new Date(dataNascita).getFullYear(),
+                dataNascita: dataNascitaInput,
+                sesso: sessoInput ? sessoInput.value : "N/D",
+                provincia: document.getElementById('provincia').value,
+                anno: new Date(dataNascitaInput).getFullYear()
             }
-
-
-            let mezziSelezionati = [];
-            persona.mezzi.forEach(checkbox => {
-                mezziSelezionati.push(checkbox.value);
-            });
-            let outputMezzi = mezziSelezionati.join();
-            let sessosel = persona.sesso.value;
 
             let generazione = '';
             if (persona.anno >= 1901 && persona.anno <= 1927) generazione = "Greatest Generation";
@@ -152,37 +242,37 @@
             else if (persona.anno >= 2013) generazione = "Generazione Alpha";
             else generazione = "Anno non valido";
 
+            persona.generazione = generazione;
 
-            persona[generazione] = generazione;
+            let mezziSelezionati = [];
+            mezziInput.forEach(checkbox => {
+                mezziSelezionati.push(checkbox.value);
+            });
+            let outputMezzi = mezziSelezionati.join(", ");
 
-            document.getElementById('outnome').innerHTML = persona.nome;
-            document.getElementById('outcognome').innerHTML = persona.cognome;
-            document.getElementById('outemail').innerHTML = persona.email;
-            document.getElementById('outcodice').innerHTML = persona.codice;
-            document.getElementById('outindirizzo').innerHTML = persona.indirizzo;
-            document.getElementById('outcitta').innerHTML = persona.citta;
-            document.getElementById('outcap').innerHTML = persona.cap;
-            document.getElementById('outdatanascita').innerHTML = persona.dataNascita;
-            document.getElementById('outsesso').innerHTML = sessosel;
-            document.getElementById('outprovincia').innerHTML = persona.provincia;
-            document.getElementById('outmezzi').innerHTML = outputMezzi;
+            document.getElementById('outnome').innerHTML = "Nome: " + persona.nome;
+            document.getElementById('outcognome').innerHTML = "Cognome: " + persona.cognome;
+            document.getElementById('outemail').innerHTML = "Email: " + persona.email;
+            document.getElementById('outcodice').innerHTML = "Cod. Fiscale: " + persona.codice;
+            document.getElementById('outindirizzo').innerHTML = "Indirizzo: " + persona.indirizzo;
+            document.getElementById('outcitta').innerHTML = "Città: " + persona.citta;
+            document.getElementById('outcap').innerHTML = "CAP: " + persona.cap;
+            document.getElementById('outdatanascita').innerHTML = "Data: " + persona.dataNascita + " (" + generazione + ")";
+            document.getElementById('outsesso').innerHTML = "Sesso: " + persona.sesso;
+            document.getElementById('outprovincia').innerHTML = "Provincia: " + persona.provincia;
+            document.getElementById('outmezzi').innerHTML = "Mezzi: " + outputMezzi;
 
+            elenco.push(persona);
+            localStorage.setItem("elenco", JSON.stringify(elenco));
+        }
 
-           elenco.push(persona);
-           localStorage.setItem("elenco", JSON.stringify(elenco));
+        function eseguiTutto() {
+            let erroriPresenti = controlla();
+            if (!erroriPresenti) {
+                calcolaGenerazione();
+            }
         }
     </script>
-    <div id="outnome"></div>
-    <div id="outcognome"></div>
-    <div id="outemail"></div>
-    <div id="outcodice"></div>
-    <div id="outindirizzo"></div>
-    <div id="outcitta"></div>
-    <div id="outcap"></div>
-    <div id="outdatanascita"></div>
-    <div id="outsesso"></div>
-    <div id="outmezzi"></div>
-    <div id="outprovincia"></div>
 </body>
 
 </html>
