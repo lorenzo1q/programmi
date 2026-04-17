@@ -139,7 +139,7 @@
             let flag = false;
 
             let nomeTest = document.getElementById("nome").value;
-            const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ' -]{2,50}$/;
+            const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,50}$/;
             if (nomeRegex.test(nomeTest) == false) {
                 document.getElementById("pNomeTest").innerHTML = "Nome non valido!";
                 flag = true;
@@ -148,7 +148,7 @@
             }
 
             let cognomeTest = document.getElementById("cognome").value;
-            const cognomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+            const cognomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,50}$/;
             if (cognomeRegex.test(cognomeTest) == false) {
                 document.getElementById("pCognomeTest").innerHTML = "Cognome non valido!";
                 flag = true;
@@ -157,7 +157,7 @@
             }
 
             let emailTest = document.getElementById("email").value;
-            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
             if (emailRegex.test(emailTest) == false) {
                 document.getElementById("pEmailTest").innerHTML = "Email non valida!";
                 flag = true;
@@ -166,7 +166,7 @@
             }
 
             let codFiscaleTest = document.getElementById("codFiscale").value;
-            const codFiscaleRegex = /^[A-Z]{6}[0-9]{2}[A-EHLMPRST][0-9]{2}[A-Z][0-9]{3}[A-Z]$/i;
+            const codFiscaleRegex = /^[A-Z]{6}[0-9]{2}[A-EHLMPRST][0-9]{2}[A-Z][0-9]{3}[A-Z]$/;
             if (codFiscaleRegex.test(codFiscaleTest) == false) {
                 document.getElementById("pCodFiscaleTest").innerHTML = "Codice Fiscale non valido!";
                 flag = true;
@@ -175,7 +175,7 @@
             }
 
             let cittaTest = document.getElementById("citta").value;
-            const cittaRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ]+(?:[ '-][A-Za-zÀ-ÖØ-öø-ÿ]+)*$/;
+            const cittaRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,50}$/;
             if (cittaRegex.test(cittaTest) == false) {
                 document.getElementById("pCittaTest").innerHTML = "Città non valida!";
                 flag = true;
@@ -184,7 +184,7 @@
             }
 
             let indirizzoTest = document.getElementById("indirizzo").value;
-            const indirizzoRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s.,'\/-]{5,100}$/;
+            const indirizzoRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s.,'/-]{5,100}$/;
             if (indirizzoRegex.test(indirizzoTest) == false) {
                 document.getElementById("pIndirizzoTest").innerHTML = "Indirizzo non valido!";
                 flag = true;
@@ -202,7 +202,7 @@
             }
 
             let annoTest = document.getElementById("annoNascita").value;
-            const annoRegex = /^(19\d{2}|20[0-2]\d)$/;
+            const annoRegex = /^(19\d{2}|20\d{2})$/;
             if (annoRegex.test(annoTest) == false) {
                 document.getElementById("pAnnoNascitaTest").innerHTML = "Anno di nascita non valido!";
                 flag = true;
