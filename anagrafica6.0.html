@@ -141,7 +141,7 @@
             let flag = false;
 
             let nomeTest = document.getElementById("nome").value;
-            const nomeRegex =/^[\p{L}\s]+{2,50}$/;
+            const nomeRegex =/^[\p{L}\s]+$/;
             if (!nomeRegex.test(nomeTest)) {
                 document.getElementById("pNomeTest").innerHTML = "Nome non valido!";
                 flag = true;
