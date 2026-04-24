@@ -1,7 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Anagrafica Utente</title>
     <style>
         .container {
@@ -74,7 +76,7 @@
             </div>
 
             <div>
-                <label>sesso:</label><br>
+                <label>Sesso:</label><br>
                 <input type="radio" name="sesso" id="m" value="maschio">
                 <label for="m">maschio</label><br>
                 <input type="radio" name="sesso" id="f" value="femmina">
@@ -95,17 +97,17 @@
             </div>
 
             <div>
-                <label>mezzo di trasporto:</label><br>
-                <label for="box1"> ho un auto</label>
+                <label>Mezzo di trasporto:</label><br>
+                <label for="box1">ho un auto</label>
                 <input type="checkbox" id="box1" name="auto" value="auto"><br>
-                <label for="box2"> ho una bici</label>
+                <label for="box2">ho una bici</label>
                 <input type="checkbox" id="box2" name="bici" value="bici"><br>
-                <label for="box3"> ho un cavallo</label>
+                <label for="box3">ho un cavallo</label>
                 <input type="checkbox" id="box3" name="cavallo" value="cavallo"><br>
             </div>
 
             <div>
-                <label>materie preferite:</label><br>
+                <label>Materie preferite:</label><br>
                 <select name="materie_preferite" id="materie" multiple>
                     <option value="motoria">motoria</option>
                     <option value="storia">storia</option>
@@ -133,14 +135,16 @@
     </div>
 
     <script>
-        let elenco = [];
+        // FIX 1: carica i dati esistenti dal localStorage
+        let elenco = JSON.parse(localStorage.getItem("elenco")) || [];
 
         function controlla() {
             let flag = false;
 
+            // FIX 2: tutti i regex usano escape Unicode \uXXXX al posto di caratteri diretti
             let nomeTest = document.getElementById("nome").value;
-            const nomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,50}$/;
-            if (nomeRegex.test(nomeTest) == false) {
+            const nomeRegex = /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\s'\-]{2,50}$/;
+            if (!nomeRegex.test(nomeTest)) {
                 document.getElementById("pNomeTest").innerHTML = "Nome non valido!";
                 flag = true;
             } else {
@@ -148,8 +152,8 @@
             }
 
             let cognomeTest = document.getElementById("cognome").value;
-            const cognomeRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,50}$/;
-            if (cognomeRegex.test(cognomeTest) == false) {
+            const cognomeRegex = /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\s'\-]{2,50}$/;
+            if (!cognomeRegex.test(cognomeTest)) {
                 document.getElementById("pCognomeTest").innerHTML = "Cognome non valido!";
                 flag = true;
             } else {
@@ -157,8 +161,8 @@
             }
 
             let emailTest = document.getElementById("email").value;
-            const emailRegex = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
-            if (emailRegex.test(emailTest) == false) {
+            const emailRegex = /^[A-Za-z0-9._%+\-]+@[A-Za-z0-9.\-]+\.[A-Za-z]{2,}$/;
+            if (!emailRegex.test(emailTest)) {
                 document.getElementById("pEmailTest").innerHTML = "Email non valida!";
                 flag = true;
             } else {
@@ -166,8 +170,8 @@
             }
 
             let codFiscaleTest = document.getElementById("codFiscale").value;
-            const codFiscaleRegex = /^[A-Z]{6}[0-9]{2}[A-EHLMPRST][0-9]{2}[A-Z][0-9]{3}[A-Z]$/;
-            if (codFiscaleRegex.test(codFiscaleTest) == false) {
+            const codFiscaleRegex = /^[A-Z]{6}[0-9]{2}[ABEHLMPRST][0-9]{2}[A-Z][0-9]{3}[A-Z]$/;
+            if (!codFiscaleRegex.test(codFiscaleTest)) {
                 document.getElementById("pCodFiscaleTest").innerHTML = "Codice Fiscale non valido!";
                 flag = true;
             } else {
@@ -175,8 +179,8 @@
             }
 
             let cittaTest = document.getElementById("citta").value;
-            const cittaRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ\s'-]{2,50}$/;
-            if (cittaRegex.test(cittaTest) == false) {
+            const cittaRegex = /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\s'\-]{2,50}$/;
+            if (!cittaRegex.test(cittaTest)) {
                 document.getElementById("pCittaTest").innerHTML = "Città non valida!";
                 flag = true;
             } else {
@@ -184,8 +188,8 @@
             }
 
             let indirizzoTest = document.getElementById("indirizzo").value;
-            const indirizzoRegex = /^[A-Za-zÀ-ÖØ-öø-ÿ0-9\s.,'/-]{5,100}$/;
-            if (indirizzoRegex.test(indirizzoTest) == false) {
+            const indirizzoRegex = /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF0-9\s.,'\-\/]{5,100}$/;
+            if (!indirizzoRegex.test(indirizzoTest)) {
                 document.getElementById("pIndirizzoTest").innerHTML = "Indirizzo non valido!";
                 flag = true;
             } else {
@@ -194,45 +198,64 @@
 
             let capTest = document.getElementById("cap").value;
             const capRegex = /^\d{5}$/;
-            if (capRegex.test(capTest) == false) {
+            if (!capRegex.test(capTest)) {
                 document.getElementById("pCapTest").innerHTML = "CAP non valido!";
                 flag = true;
             } else {
                 document.getElementById("pCapTest").innerHTML = "";
             }
 
+            // FIX 3: verifica che l'anno inserito corrisponda alla data di nascita
             let annoTest = document.getElementById("annoNascita").value;
             const annoRegex = /^(19\d{2}|20\d{2})$/;
-            if (annoRegex.test(annoTest) == false) {
+            if (!annoRegex.test(annoTest)) {
                 document.getElementById("pAnnoNascitaTest").innerHTML = "Anno di nascita non valido!";
                 flag = true;
             } else {
-                document.getElementById("pAnnoNascitaTest").innerHTML = "";
+                let dataNascitaInput = document.getElementById("dataNascita").value;
+                if (dataNascitaInput) {
+                    let annoData = new Date(dataNascitaInput).getFullYear();
+                    if (parseInt(annoTest) !== annoData) {
+                        document.getElementById("pAnnoNascitaTest").innerHTML = "Anno non corrisponde alla data di nascita!";
+                        flag = true;
+                    } else {
+                        document.getElementById("pAnnoNascitaTest").innerHTML = "";
+                    }
+                } else {
+                    document.getElementById("pAnnoNascitaTest").innerHTML = "";
+                }
             }
 
-            return flag; 
+            return flag;
         }
 
         function calcolaGenerazione() {
-            let dataNascitaInput = document.getElementById('dataNascita').value;
+            let dataNascitaInput = document.getElementById("dataNascita").value;
             let sessoInput = document.querySelector('input[name="sesso"]:checked');
             let mezziInput = document.querySelectorAll('input[type="checkbox"]:checked');
 
+            // FIX 4: mezziSelezionati viene salvato dentro persona
+            let mezziSelezionati = [];
+            mezziInput.forEach(function(checkbox) {
+                mezziSelezionati.push(checkbox.value);
+            });
+
             let persona = {
-                nome: document.getElementById('nome').value,
-                cognome: document.getElementById('cognome').value,
-                email: document.getElementById('email').value,
-                codice: document.getElementById('codFiscale').value,
-                indirizzo: document.getElementById('indirizzo').value,
-                citta: document.getElementById('citta').value,
-                cap: document.getElementById('cap').value,
+                nome: document.getElementById("nome").value,
+                cognome: document.getElementById("cognome").value,
+                email: document.getElementById("email").value,
+                codice: document.getElementById("codFiscale").value,
+                indirizzo: document.getElementById("indirizzo").value,
+                citta: document.getElementById("citta").value,
+                cap: document.getElementById("cap").value,
                 dataNascita: dataNascitaInput,
                 sesso: sessoInput ? sessoInput.value : "N/D",
-                provincia: document.getElementById('provincia').value,
-                anno: new Date(dataNascitaInput).getFullYear()
-            }
+                provincia: document.getElementById("provincia").value,
+                anno: new Date(dataNascitaInput).getFullYear(),
+                mezzi: mezziSelezionati
+            };
 
-            let generazione = '';
+            let generazione = "";
             if (persona.anno >= 1901 && persona.anno <= 1927) generazione = "Greatest Generation";
             else if (persona.anno >= 1928 && persona.anno <= 1945) generazione = "Generazione Silenziosa";
             else if (persona.anno >= 1946 && persona.anno <= 1964) generazione = "Baby Boomers";
@@ -244,23 +267,19 @@
 
             persona.generazione = generazione;
 
-            let mezziSelezionati = [];
-            mezziInput.forEach(checkbox => {
-                mezziSelezionati.push(checkbox.value);
-            });
-            let outputMezzi = mezziSelezionati.join(", ");
+            let outputMezzi = mezziSelezionati.length > 0 ? mezziSelezionati.join(", ") : "nessuno";
 
-            document.getElementById('outnome').innerHTML = "Nome: " + persona.nome;
-            document.getElementById('outcognome').innerHTML = "Cognome: " + persona.cognome;
-            document.getElementById('outemail').innerHTML = "Email: " + persona.email;
-            document.getElementById('outcodice').innerHTML = "Cod. Fiscale: " + persona.codice;
-            document.getElementById('outindirizzo').innerHTML = "Indirizzo: " + persona.indirizzo;
-            document.getElementById('outcitta').innerHTML = "Città: " + persona.citta;
-            document.getElementById('outcap').innerHTML = "CAP: " + persona.cap;
-            document.getElementById('outdatanascita').innerHTML = "Data: " + persona.dataNascita + " (" + generazione + ")";
-            document.getElementById('outsesso').innerHTML = "Sesso: " + persona.sesso;
-            document.getElementById('outprovincia').innerHTML = "Provincia: " + persona.provincia;
-            document.getElementById('outmezzi').innerHTML = "Mezzi: " + outputMezzi;
+            document.getElementById("outnome").innerHTML = "Nome: " + persona.nome;
+            document.getElementById("outcognome").innerHTML = "Cognome: " + persona.cognome;
+            document.getElementById("outemail").innerHTML = "Email: " + persona.email;
+            document.getElementById("outcodice").innerHTML = "Cod. Fiscale: " + persona.codice;
+            document.getElementById("outindirizzo").innerHTML = "Indirizzo: " + persona.indirizzo;
+            document.getElementById("outcitta").innerHTML = "Citt\u00E0: " + persona.citta;
+            document.getElementById("outcap").innerHTML = "CAP: " + persona.cap;
+            document.getElementById("outdatanascita").innerHTML = "Data: " + persona.dataNascita + " (" + generazione + ")";
+            document.getElementById("outsesso").innerHTML = "Sesso: " + persona.sesso;
+            document.getElementById("outprovincia").innerHTML = "Provincia: " + persona.provincia;
+            document.getElementById("outmezzi").innerHTML = "Mezzi: " + outputMezzi;
 
             elenco.push(persona);
             localStorage.setItem("elenco", JSON.stringify(elenco));
