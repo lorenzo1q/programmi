@@ -135,13 +135,11 @@
     </div>
 
     <script>
-        // FIX 1: carica i dati esistenti dal localStorage
         let elenco = JSON.parse(localStorage.getItem("elenco")) || [];
 
         function controlla() {
             let flag = false;
 
-            // FIX 2: tutti i regex usano escape Unicode \uXXXX al posto di caratteri diretti
             let nomeTest = document.getElementById("nome").value;
             const nomeRegex = /^[A-Za-z\u00C0-\u00D6\u00D8-\u00F6\u00F8-\u00FF\s'\-]{2,50}$/;
             if (!nomeRegex.test(nomeTest)) {
@@ -205,7 +203,6 @@
                 document.getElementById("pCapTest").innerHTML = "";
             }
 
-            // FIX 3: verifica che l'anno inserito corrisponda alla data di nascita
             let annoTest = document.getElementById("annoNascita").value;
             const annoRegex = /^(19\d{2}|20\d{2})$/;
             if (!annoRegex.test(annoTest)) {
@@ -234,7 +231,6 @@
             let sessoInput = document.querySelector('input[name="sesso"]:checked');
             let mezziInput = document.querySelectorAll('input[type="checkbox"]:checked');
 
-            // FIX 4: mezziSelezionati viene salvato dentro persona
             let mezziSelezionati = [];
             mezziInput.forEach(function(checkbox) {
                 mezziSelezionati.push(checkbox.value);
