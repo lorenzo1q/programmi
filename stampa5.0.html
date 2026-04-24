@@ -1,24 +1,45 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stampa</title>
 </head>
 <body>
-        <div id="cont"></div>
-        <script>
-            let par;
-            let co = document.getElementById("cont");
-            let s = JSON.parse(localStorage.getItem("elenco"));
+    <h2>Elenco Utenti</h2>
+    <div id="cont"></div>
 
-            for(i=0;i<s.length;i++){
-                par = document.createElement("p");
-                par.textContent = JSON.stringify(s[i]);
-                co.appendChild(par)
+    <button onclick="localStorage.clear(); location.reload()" style="margin-top: 20px;">
+        Cancella tutti i dati
+    </button>
+
+    <script>
+        let co = document.getElementById("cont");
+        let s = JSON.parse(localStorage.getItem("elenco"));
+
+        if (!s || s.length === 0) {
+            co.innerHTML = "<p>Nessun dato presente.</p>";
+        } else {
+            for (let i = 0; i < s.length; i++) {
+                let p = s[i];
+                let mezzi = p.mezzi && p.mezzi.length > 0 ? p.mezzi.join(", ") : "nessuno";
+                let div = document.createElement("div");
+                div.style.borderBottom = "1px solid #ccc";
+                div.style.marginBottom = "10px";
+                div.style.paddingBottom = "10px";
+                div.innerHTML =
+                    "<strong>Utente " + (i + 1) + "</strong><br>" +
+                    "Nome: " + p.nome + " " + p.cognome + "<br>" +
+                    "Email: " + p.email + "<br>" +
+                    "Cod. Fiscale: " + p.codice + "<br>" +
+                    "Indirizzo: " + p.indirizzo + ", " + p.citta + " (" + p.cap + ")<br>" +
+                    "Provincia: " + p.provincia + "<br>" +
+                    "Sesso: " + p.sesso + "<br>" +
+                    "Mezzi: " + mezzi + "<br>" +
+                    "Data di nascita: " + p.dataNascita + " &mdash; " + p.generazione;
+                co.appendChild(div);
             }
-
-        </script>
-
-    </body>
+        }
+    </script>
+</body>
 </html>
